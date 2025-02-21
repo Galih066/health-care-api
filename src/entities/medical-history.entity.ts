@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as MongooseSchema } from "mongoose";
+import { Patient } from "./patients.entity";
 
 @Schema({ timestamps: true })
 export class MedicalHistory extends Document {
@@ -10,8 +11,8 @@ export class MedicalHistory extends Document {
     })
     history_id: string;
 
-    @Prop({ required: true })
-    patient_id: string;
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'Patient' })
+    patient_id: Patient;
 
     @Prop({ required: true })
     condition: string;
