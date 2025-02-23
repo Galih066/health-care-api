@@ -8,7 +8,7 @@ export enum Gender {
 }
 
 @Schema({ timestamps: true })
-export class Patient extends Document {
+export class Profile extends Document {
     @Prop({
         type: MongooseSchema.Types.ObjectId,
         default: MongooseSchema.Types.ObjectId,
@@ -32,7 +32,22 @@ export class Patient extends Document {
     email: string;
 
     @Prop({ required: true })
+    city: string;
+
+    @Prop({ required: true })
+    state: string;
+
+    @Prop({ required: true })
+    country: string;
+
+    @Prop({ required: true })
     address: string;
+
+    @Prop({ required: true })
+    zip_code: string;
+
+    @Prop()
+    profile_picture: string;
 }
 
-export const PatientSchema = SchemaFactory.createForClass(Patient)
+export const PatientSchema = SchemaFactory.createForClass(Profile)
