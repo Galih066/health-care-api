@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as MongooseSchema } from "mongoose";
+import { User } from "./user.entity";
 
 export enum Gender {
     MALE = 'male',
@@ -15,11 +16,8 @@ export class Patient extends Document {
     })
     patient_id: string;
 
-    @Prop({ required: true })
-    first_name: string;
-
-    @Prop({ required: true })
-    last_name: string;
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'User' })
+    user_id: User;
 
     @Prop({ required: true })
     dob: Date;
