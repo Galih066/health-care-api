@@ -1,11 +1,10 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as MongooseSchema } from "mongoose";
 import { User } from "./user.entity";
-
-export enum Gender {
-    MALE = 'male',
-    FEMALE = 'female'
-}
+import { Allergies } from "./allergies.entity";
+import { Insurance } from "./insurance.entity";
+import { LoginActivity } from "./login-activity.entity";
+import { MedicalHistory } from "./medical-history.entity";
 
 @Schema({ timestamps: true })
 export class Patient extends Document {
@@ -19,20 +18,17 @@ export class Patient extends Document {
     @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'User' })
     user_id: User;
 
-    @Prop({ required: true })
-    dob: Date;
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'Allergies' })
+    allergy_id: Allergies;
 
-    @Prop({ required: true, enum: Gender })
-    gender: Gender;
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'Insurance' })
+    insurance_id: Insurance;
 
-    @Prop({ required: true })
-    contact_number: string;
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'LoginActivity' })
+    login_id: LoginActivity;
 
-    @Prop({ required: true })
-    email: string;
-
-    @Prop({ required: true })
-    address: string;
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'MedicalHistory' })
+    history_id: MedicalHistory;
 }
 
 export const PatientSchema = SchemaFactory.createForClass(Patient)
