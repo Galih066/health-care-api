@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as MongooseSchema } from "mongoose";
 import { User } from "./user.entity";
+import { Profile } from "./profile.entity";
 import { Allergies } from "./allergies.entity";
 import { Insurance } from "./insurance.entity";
 import { LoginActivity } from "./login-activity.entity";
@@ -17,6 +18,9 @@ export class Patient extends Document {
 
     @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'User' })
     user_id: User;
+
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'Profile' })
+    profile_id: Profile;
 
     @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'Allergies' })
     allergy_id: Allergies;
